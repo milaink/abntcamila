@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
+
+    <script>
+        function veja(frase) {
+            document.write(frase);
+        }
+
+        function formatar() {
+            var nome = (document.forms["Formatacao"]["nome"].value);
+
+            function capitalizeFirst(str) {
+                var subst = str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+                    return a.toUpperCase();
+                });
+                return subst;
+            }
+            capitalizeFirst(nome);
+
+            var resultado = capitalizeFirst(nome).split(" "); // ARRAY DO MEU NOME
+
+            var comp = resultado.length; // NUMERO DE ELEMENTOS DO MEU NOME
+
+
+            for (let i = 0; i < comp; i++) {
+                if (resultado[i] == "De" || resultado[i] == "Da" || resultado[i] == "Dos" || resultado[i] == "Von" || resultado[i] == "Das" || resultado[i] == "Van" || resultado[i] == "Di") {
+                    resultado.splice(i, 1);
+                }
+            }
+
+            comp = resultado.length;
+            resultado.splice(0, 0, resultado[comp - 1]);
+            resultado.splice(comp, 1);
+
+
+            comp = resultado.length;
+
+            for (let i = 2; i < comp; i++) {
+                var aux = resultado[i].split("");
+                resultado[i] = aux[0];
+            }
+
+            resultado[0] = (resultado[0] + ",");
+
+            document.forms["Formatacao"]["resultado"].value = resultado.join(" ");
+        }
+    </script>
+    <style>
+        div.esquerda {
+            position: absolute;
+            color: rgb(233, 137, 13);
+            top: 130px;
+            left: 5px;
+            width: 140px;
+            height: 170px;
+            border: none;
+            padding-right: 5px;
+            text-align: right;
+            vertical-align: baseline;
+            line-height: 23px;
+        }
+        
+        div.direita {
+            position: absolute;
+            top: 120px;
+            left: 150px;
+            width: 245px;
+            height: 150px;
+            border: none;
+            background-color: rgb(48, 221, 212);
+            padding: 10px;
+            text-align: left;
+            vertical-align: baseline;
+        }
+        
+        div.titulo {
+            position: absolute;
+            color: rgb(218, 53, 168);
+            top: 50px;
+            left: 150px;
+            width: 245px;
+            height: 200px;
+            border: none;
+            background-color: rgb(48, 221, 212);
+            padding: 10px;
+            text-align: center;
+            vertical-align: baseline;
+        }
+        
+        div.botao {
+            position: absolute;
+            top: 220px;
+            left: 160px;
+            width: 245px;
+            height: 3px;
+            border: none;
+            background-color: rgb(48, 221, 212);
+            text-align: center;
+            vertical-align: baseline;
+        }
+    </style>
+</head>
+
+<body style="font-family:Saira;">
+    <div class="titulo">
+        <h2>FORMATAÇÃO ABNT</h2>
+    </div>
+    <br>
+    <form name="Formatacao">
+        <div class="esquerda">
+            <p>Nome Completo:</p>
+            <p>ABNT:</p>
+        </div>
+        <div class="direita">
+            <p><input type="text" name="nome" maxlength="40" size="30" style="text-align: left;"></p>
+            <p><input type="text" name="resultado" maxlength="40" size="30" style="text-align: left;" readonly="true"></p>
+        </div>
+        <div class="botao">
+            <p><input type="button" value="Formatar" name="btFormatar" onclick="formatar()"></p>
+        </div>
+    </form>
+
+</body>
+
+</html>
